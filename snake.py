@@ -1,7 +1,7 @@
 '''
 Snake game.
 Authors:
-<insert the names of your teammates here>
+Jerrod Jackson, Akinwole Akinnusi
 '''
 
 import pygame
