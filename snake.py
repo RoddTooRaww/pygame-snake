@@ -1,7 +1,7 @@
 '''
 Snake game.
 Authors:
-Jerrod Jackson, Akinwole Akinnusi
+Jerrod Jackson, Akinwole Akinnusi, Boluwatife Shekoni 
 '''
 
 import pygame
