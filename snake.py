@@ -1,6 +1,6 @@
 '''
 Snake game.
-Authors: Akinwole Akinnusi, Jerrod Jackson, Boluwatife Shekoni
+Authors: Akinwole Akinnusi, Jerrod Jackson
 '''
 
 import pygame
@@ -72,7 +72,9 @@ def snake_ate_food(snake, food):
     """
     if  snake[0] == food:
         return True
-    elif food[-1] == snake:
+    if True :
+        x = create_food_position()
+    else:
         return False
 
 def snake_ran_out_of_bounds(snake):
@@ -80,7 +82,14 @@ def snake_ran_out_of_bounds(snake):
     snake - list of 2-tuples representing the positions of each snake segment
     Note that the grid is GRID_WIDTH cells wide and GRID_HEIGHT cells high.
     """
-    snake
+    if snake [0][0] == 0:
+        return True
+    if snake [0][1] == 0:
+        return True
+    if snake [0][1] == 29:
+        return True
+    if snake [0][0] == 29:
+        return True
     return False
 
 def snake_intersected_body(snake):
@@ -89,7 +98,7 @@ def snake_intersected_body(snake):
     The snake ran into itself if the position of the head is the same as the position
     of any of its body segments.
     """
-    for snake[0] in snake[1: -1]:
+    if snake[0] in snake[1: -1]:
         return True
     return False
     
@@ -100,12 +109,7 @@ def get_score(snake):
     The user earns 10 points for each of the segments in the snake.
     For example, if the snake has 25 segments, the score is 250.
     """
-    score = 0
-    current_score = 0
-    food = create_food_position()
-    if snake_ate_food(snake, food):
-        current_socre += 1
-    score = current_score * 10
+    score = len(snake) * 10
     return score
 
 def get_game_over_text(score):
@@ -113,8 +117,7 @@ def get_game_over_text(score):
     This text should contain 'Game Over' as well as the score.
     score - integer representing the current score of the game.
     """
-    score = get_score(score)
-    return 'Game Over' * str(score)
+    return 'Game Over' + str(score)
 
 def get_snake_speed(snake):
     """Return the number of cells the snake should travel in one second.
