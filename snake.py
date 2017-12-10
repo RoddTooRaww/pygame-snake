@@ -1,6 +1,6 @@
 '''
 Snake game.
-Authors: Akinwole Akinnusi, Jerrod Jackson
+Authors: Akinwole Akinnusi, Jerrod Jackson, Boljwatife Shekoni
 '''
 
 import pygame
@@ -73,7 +73,7 @@ def snake_ate_food(snake, food):
     if  snake[0] == food:
         return True
     if True :
-        x = create_food_position()
+        food = create_food_position()
     else:
         return False
 
@@ -125,6 +125,8 @@ def get_snake_speed(snake):
     The speed at the beginning of the game should be 5. Once the snake has eaten 10 pieces of food,
     the speed of the game should increase (by how much is up to you).
     """
+    if len(snake) > 15:        
+        return 10
     return 5
 
 def move_snake(snake, direction, food):
