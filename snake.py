@@ -43,14 +43,19 @@ def get_direction(previous_direction, event_key):
     event_key - the event that the user pressed; one of https://www.pygame.org/docs/ref/key.html
     If event_key does not correspond with any of the arrows keys, return previous_direction.
     """
+    
     if event_key == pygame.K_LEFT:
-        return DIRECTION_LEFT
+        if previous_direction != pygame.K_RIGHT:
+             return DIRECTION_LEFT
     elif event_key == pygame.K_UP:
-        return DIRECTION_UP
-    if event_key == pygame.K_RIGHT:
-        return DIRECTION_RIGHT
+        if previous_direction != pygame.K_DOWN:
+             return DIRECTION_UP
+    elif event_key == pygame.K_RIGHT:
+        if previous_direction != pygame.K_LEFT:
+             return DIRECTION_RIGHT
     elif event_key == pygame.K_DOWN:
-        return DIRECTION_DOWN
+        if previous_direction != pygame.K_UP:
+             return DIRECTION_DOWN
     return previous_direction
 def create_food_position():
     """Returns a random 2-tuple in the grid where the food should be located.
@@ -72,8 +77,6 @@ def snake_ate_food(snake, food):
     """
     if  snake[0] == food:
         return True
-    if True :
-        food = create_food_position()
     else:
         return False
 
@@ -82,13 +85,13 @@ def snake_ran_out_of_bounds(snake):
     snake - list of 2-tuples representing the positions of each snake segment
     Note that the grid is GRID_WIDTH cells wide and GRID_HEIGHT cells high.
     """
-    if snake [0][0] == 0:
+    if snake [0][0] < 0:
         return True
-    if snake [0][1] == 0:
+    if snake [0][1] < 0:
         return True
-    if snake [0][1] == 29:
+    if snake [0][1] > 29:
         return True
-    if snake [0][0] == 29:
+    if snake [0][0] > 29:
         return True
     return False
 
@@ -98,8 +101,9 @@ def snake_intersected_body(snake):
     The snake ran into itself if the position of the head is the same as the position
     of any of its body segments.
     """
-    if snake[0] in snake[1: -1]:
-        return True
+    for segment in range(1,len(snake)):
+        if snake[0] == snake[segment]:
+            return True
     return False
     
 
@@ -125,7 +129,9 @@ def get_snake_speed(snake):
     The speed at the beginning of the game should be 5. Once the snake has eaten 10 pieces of food,
     the speed of the game should increase (by how much is up to you).
     """
-    if len(snake) > 15:        
+    if len(snake) >= 20:
+        return 20
+    elif len(snake) >= 15:        
         return 10
     return 5
 
